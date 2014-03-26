@@ -34,6 +34,6 @@ public class FFMpegUtils {
      * 
      * @since 1.0.0
      */
-    public static File FFMPEG_EXECUTABLE = new File (OSUtils.getJarLocation(),
-                                                      "FFMpeg/");
+    public static File FFMPEG_EXECUTABLE = new File (OSUtils.getJarLocation()
+                                                        .getParent(),"FFMpeg/");
 }

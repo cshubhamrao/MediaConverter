@@ -17,6 +17,8 @@
 
 package com.github.cshubhamrao.MediaConverter.Library;
 
+import java.io.File;
+
 /** This class contains various methods and fields dealing with FFMpeg and its 
  * executable
  * 
@@ -24,5 +26,14 @@ package com.github.cshubhamrao.MediaConverter.Library;
  * @author Shubham Rao
  */
 public class FFMpegUtils {
-    
+
+    /** This field contains the {@link java.io.File} object representing the 
+     * path to the executable of FFMpeg. Its default value (ie. the value 
+     * unaltered by any statement or method) represents the folder where 
+     * architecture dependent FFMpeg executables are stored.
+     * 
+     * @since 1.0.0
+     */
+    public static File FFMPEG_EXECUTABLE = new File (OSUtils.getJarLocation(),
+                                                      "FFMpeg/");
 }

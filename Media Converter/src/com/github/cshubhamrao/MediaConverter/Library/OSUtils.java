@@ -61,7 +61,7 @@ public class OSUtils {
         UNKNOWN
     }
     
-    /** This method returns a member of {@link #OperatingSystem} representing
+    /** This method returns a member of {@code OperatingSystem} representing
      * the Operating System this JAR is running from.
      *
      * @version 1.0.0

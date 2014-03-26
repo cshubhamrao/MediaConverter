@@ -63,6 +63,7 @@ public class FFMpegUtils {
     /** This method sets {@code FFMPEG_EXECUTABLE} based on the current
      * Operating System.
      *
+     * @since 1.0.1
      * @return The {@code File} object for {@code FFMPEG_EXECUTABLE}
      */
     public static File setFFMpegExecutable() {

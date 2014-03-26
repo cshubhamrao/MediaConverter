@@ -17,11 +17,24 @@
 
 package com.github.cshubhamrao.MediaConverter;
 
+import com.github.cshubhamrao.MediaConverter.Library.FFMpegUtils;
+import com.github.cshubhamrao.MediaConverter.Library.OSUtils;
+import java.io.File;
+import javax.swing.JOptionPane;
+
 /** This class is the main UI for the app.
  *
  * @author Shubham Rao
  */
 public class MainUI extends javax.swing.JFrame {
+    
+    /* Represents Files used by all parts of program */
+    static File ffmpegLocation = new File (FFMpegUtils.FFMPEG_EXECUTABLE.
+                                                                     getPath());
+    File inputFileLocation;
+    File outputFileLocation;
+    File logFileLocation = new File (OSUtils.getJarLocation().getParent(),
+                                                                    "file.log");
 
     /**
      * Creates new form MainUI
@@ -55,11 +68,11 @@ public class MainUI extends javax.swing.JFrame {
         outputLogButton = new javax.swing.JButton();
 
         inputFileChooser.setCurrentDirectory(new java.io.File("C:\\Users\\Shubham\\Videos"));
-        inputFileChooser.setDialogTitle("");
+        inputFileChooser.setDialogTitle("Open file for conversion");
 
         outputFileChooser.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
         outputFileChooser.setCurrentDirectory(new java.io.File("C:\\Users\\Shubham\\Videos"));
-        outputFileChooser.setDialogTitle("");
+        outputFileChooser.setDialogTitle("Save the output file as");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Media Converter");
@@ -69,10 +82,20 @@ public class MainUI extends javax.swing.JFrame {
         inputFileLabel.setText("Input File");
 
         inputFileBrowse.setText("Browse");
+        inputFileBrowse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputFileBrowseActionPerformed(evt);
+            }
+        });
 
         outputFileLabel.setText("Output File");
 
         outputFileBrowse.setText("Browse");
+        outputFileBrowse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                outputFileBrowseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout filePanelLayout = new javax.swing.GroupLayout(filePanel);
         filePanel.setLayout(filePanelLayout);
@@ -165,6 +188,30 @@ public class MainUI extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_exitButtonActionPerformed
 
+    private void inputFileBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputFileBrowseActionPerformed
+        // TODO add your handling code here:
+        inputFileChooser.showDialog(this, "Open this File");
+        inputFile.setText(inputFileChooser.getSelectedFile().getPath());
+        // Finally set inputFileLocation as text of the text bar
+        inputFileLocation = new File (inputFile.getText());
+        // If the file doesn't exist, show an error message
+        if (!inputFileLocation.exists())
+        {
+            // Creates a scary error message dialog box.
+            JOptionPane.showMessageDialog(this, "The input file doesn't exsist."
+                    + "\nPlease choose another file", "Inavlid file selected", 
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_inputFileBrowseActionPerformed
+
+    private void outputFileBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_outputFileBrowseActionPerformed
+        // TODO add your handling code here:
+        outputFileChooser.showDialog(this, "Open this File");
+        outputFile.setText(outputFileChooser.getSelectedFile().getPath());
+        // Finally set outputFileLocation as text of the text bar
+        outputFileLocation = new File (outputFile.getText());
+    }//GEN-LAST:event_outputFileBrowseActionPerformed
+
     /** This is the main method for {@code MainUI}
      * @param args the command line arguments
      */
@@ -180,8 +227,12 @@ public class MainUI extends javax.swing.JFrame {
                     util.logging.Level.SEVERE, null, ex);
         }
         
+        ffmpegLocation = FFMpegUtils.setFFMpegExecutable();
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {new MainUI().setVisible(true);});
+        //DEBUG 
+        System.out.println(ffmpegLocation);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

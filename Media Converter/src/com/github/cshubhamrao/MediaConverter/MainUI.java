@@ -17,9 +17,6 @@
 
 package com.github.cshubhamrao.MediaConverter;
 
-import java.util.logging.Level;
-import javax.swing.UnsupportedLookAndFeelException;
-
 /** This class is the main UI for the app.
  *
  * @author Shubham Rao
@@ -177,7 +174,8 @@ public class MainUI extends javax.swing.JFrame {
             javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager
                     .getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | 
-                IllegalAccessException | UnsupportedLookAndFeelException ex) {
+                IllegalAccessException | 
+                javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainUI.class.getName()).log(java.
                     util.logging.Level.SEVERE, null, ex);
         }

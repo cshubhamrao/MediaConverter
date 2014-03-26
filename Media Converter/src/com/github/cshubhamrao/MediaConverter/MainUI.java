@@ -29,7 +29,7 @@ import javax.swing.JOptionPane;
 public class MainUI extends javax.swing.JFrame {
     
     /* Represents Files used by all parts of program */
-    static File ffmpegLocation = new File ("C:/Users/Shubham/Documents/GitHub/MediaConverter/FFMpeg//ffmpeg.exe");
+    static File ffmpegLocation = new File ("C:/Users/Shubham/Documents/GitHub/MediaConverter/FFMpeg/ffmpeg.exe");
 //    static File ffmpegLocation = new File (FFMpegUtils.FFMPEG_EXECUTABLE.
 //                                                                     getPath());
     File inputFileLocation;

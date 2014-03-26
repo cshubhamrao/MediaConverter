@@ -177,7 +177,7 @@ public class MainUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_exitButtonActionPerformed
 
     /**

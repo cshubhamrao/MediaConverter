@@ -17,10 +17,62 @@
 
 package com.github.cshubhamrao.MediaConverter.Library;
 
-/**
+import org.apache.commons.exec.OS;
+
+/** This class contains various utilities to deal with OS Dependent issues like 
+ * OS Name, location of JAR file etc.
  *
- * @author Shubham Rao <cshubhamrao@gmail.com>
+ * @version 1.0.2
+ * @author Shubham Rao
  */
 public class OSUtils {
     
+    /** This enumeration contains a list of popular Operating Systems
+     * 
+     * @version 1.0.1
+     * @since 1.0.0
+     */
+    public static enum OperatingSystem {
+        /** This constant represents Linux and/or any of its derivatives like
+         * Debian, Fedora, Ubuntu, openSUSE etc
+         * @version 1.0.0
+         * @since 1.0.0
+         */
+        LINUX,
+        
+        /** This constant represents MacOS and Mac OSX and any of its versions
+         * @version 1.0.0
+         * @since 1.0.0
+         */
+        MAC,
+
+        /** This constant represents Windows operating System and any of its
+         * versions. It excludes old versions such as WindowsNT and MS-DOS
+         * @version 1.0.0
+         * @since 1.0.0
+         */
+        WINDOWS,
+
+        /** This constant represents and OS which is not any one of the above or
+         * cannot be ascertained.
+         * @version 1.0.0
+         * @since 1.0.1
+         */
+        UNKNOWN
+    }
+    
+    /** This method returns a member of {@link #OperatingSystem} representing
+     * the Operating System this JAR is running from.
+     *
+     * @version 1.0.0
+     * @since 1.0.2
+     * @return The current Operating System
+     */
+    public static OperatingSystem getCurrentOS() {
+        OperatingSystem currentOS = OperatingSystem.UNKNOWN;
+        if (OS.isFamilyUnix()) currentOS = OperatingSystem.LINUX;
+        if (OS.isFamilyMac()) currentOS = OperatingSystem.MAC;
+        if (OS.isFamilyWindows()) currentOS = OperatingSystem.WINDOWS;
+        return currentOS;
+    }
 }

@@ -19,8 +19,6 @@ package com.github.cshubhamrao.MediaConverter.Library;
 
 import java.io.File;
 import java.net.URISyntaxException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.commons.exec.OS;
 
 /** This class contains various utilities to deal with OS Dependent issues like 
@@ -93,7 +91,8 @@ public class OSUtils {
             file =  new File(OSUtils.class.getProtectionDomain().getCodeSource().
                     getLocation().toURI());
         } catch (URISyntaxException ex) {
-            Logger.getLogger(OSUtils.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OSUtils.class.getName())
+                    .log(java.util.logging.Level.SEVERE, null, ex);
         }
         return file;
     }

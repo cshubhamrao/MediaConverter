@@ -29,8 +29,9 @@ import javax.swing.JOptionPane;
 public class MainUI extends javax.swing.JFrame {
     
     /* Represents Files used by all parts of program */
-    static File ffmpegLocation = new File (FFMpegUtils.FFMPEG_EXECUTABLE.
-                                                                     getPath());
+    static File ffmpegLocation = new File ("C:/Users/Shubham/Documents/GitHub/MediaConverter/FFMpeg//ffmpeg.exe");
+//    static File ffmpegLocation = new File (FFMpegUtils.FFMPEG_EXECUTABLE.
+//                                                                     getPath());
     File inputFileLocation;
     File outputFileLocation;
     File logFileLocation = new File (OSUtils.getJarLocation().getParent(),
@@ -227,7 +228,7 @@ public class MainUI extends javax.swing.JFrame {
                     util.logging.Level.SEVERE, null, ex);
         }
         
-        ffmpegLocation = FFMpegUtils.setFFMpegExecutable();
+//        ffmpegLocation = FFMpegUtils.setFFMpegExecutable();
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {new MainUI().setVisible(true);});

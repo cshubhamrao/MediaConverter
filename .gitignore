@@ -36,7 +36,7 @@ hs_err_pid*
 #### Netbeans ####
 ##################
 
-nbproject/private/
+nbproject/private/*
 build/
 nbbuild/
 dist/
@@ -45,3 +45,4 @@ nbactions.xml
 nb-configuration.xml
 
 #####################################################################
+Media Converter/nbproject/private/private.properties

@@ -17,12 +17,13 @@
 
 package com.github.cshubhamrao.MediaConverter.Library;
 
+import java.io.File;
 import org.apache.commons.exec.OS;
 
 /** This class contains various utilities to deal with OS Dependent issues like 
  * OS Name, location of JAR file etc.
  *
- * @version 1.0.2
+ * @version 1.0.3
  * @author Shubham Rao
  */
 public class OSUtils {
@@ -64,7 +65,6 @@ public class OSUtils {
     /** This method returns a member of {@code OperatingSystem} representing
      * the Operating System this JAR is running from.
      *
-     * @version 1.0.0
      * @since 1.0.2
      * @return The current Operating System
      */
@@ -74,5 +74,17 @@ public class OSUtils {
         if (OS.isFamilyMac()) currentOS = OperatingSystem.MAC;
         if (OS.isFamilyWindows()) currentOS = OperatingSystem.WINDOWS;
         return currentOS;
+    }
+
+    /** This method gets the path to the location of the JAR file from where
+     * this is running. Code copied from 
+     * <a href="http://stackoverflow.com/a/320595">StackOverflow</a>
+     * 
+     * @since 1.0.3
+     * @return Location to the JAR file
+     */
+    public static File getJarLocation() {
+        return new File(OSUtils.class.getProtectionDomain().getCodeSource()
+                .getLocation().getPath());
     }
 }

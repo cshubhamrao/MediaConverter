@@ -17,12 +17,15 @@
 
 package com.github.cshubhamrao.MediaConverter.Library;
 
+import com.github.cshubhamrao.MediaConverter.MainUI;
 import java.io.File;
+import java.util.HashMap;
+import org.apache.commons.exec.CommandLine;
 
 /** This class contains various methods and fields dealing with FFMpeg and its 
  * executable
  * 
- * @version 1.0.1
+ * @version 1.1.1
  * @author Shubham Rao
  */
 public class FFMpegUtils {
@@ -70,5 +73,48 @@ public class FFMpegUtils {
         FFMPEG_EXECUTABLE = FFMpegUtils.setFFMpegExecutable(OSUtils
                                                                .getCurrentOS());
         return FFMpegUtils.FFMPEG_EXECUTABLE;
+    }
+    
+    /** Builds a {@link org.apache.commons.exec#CommandLine} based on the 
+     * parameters.
+     *
+     * @param inputFile The source File;
+     * @param outputFile The output File
+     * @param overwrite Whether or not to overwrite the file if it already 
+     *                  exists
+     * @return The complete CommandLine
+     * 
+     * @since 1.1.1
+     */
+    public static CommandLine buildFFMpegExecutable(File inputFile, 
+            File outputFile, boolean overwrite) {
+        CommandLine commandLine = new CommandLine(
+          "C:/Users/Shubham/Documents/GitHub/MediaConverter/FFMpeg/ffmpeg.exe");
+        if (overwrite) commandLine.addArgument("-y");
+        String[] arguments = {
+            "-i",
+            "${INPUT}",
+            "${OUTPUT}"
+        };
+        HashMap<String, String> map = new HashMap<>();
+        map.put("INPUT", inputFile.getPath());
+        map.put("OUTPUT", outputFile.getPath());
+        commandLine.addArguments(arguments, false);
+        commandLine.setSubstitutionMap(map);
+        return commandLine;
+    }
+    
+    /** Builds a {@link org.apache.commons.exec#CommandLine} based on the 
+     * parameters.
+     *
+     * @param inputFile The source File;
+     * @param outputFile The output File
+     * @return The complete CommandLine
+     * 
+     * @since 1.1.1
+     */
+    public static CommandLine buildFFMpegExecutable(File inputFile, 
+            File outputFile) {
+        return FFMpegUtils.buildFFMpegExecutable(inputFile, outputFile, true);
     }
 }

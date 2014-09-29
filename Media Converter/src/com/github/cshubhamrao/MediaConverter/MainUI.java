@@ -16,6 +16,7 @@
  */
 package com.github.cshubhamrao.MediaConverter;
 
+import com.github.cshubhamrao.MediaConverter.Library.FFMpegLoader;
 import java.io.File;
 import javax.swing.JOptionPane;
 
@@ -212,6 +213,9 @@ public class MainUI extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+
+        new Thread(new FFMpegLoader()).start();
+
         try {
             /* Set the System look and feel */
             javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager

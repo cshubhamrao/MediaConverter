@@ -214,6 +214,7 @@ public class MainUI extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
 
+        // Create the FFMpeg executable in %temp% on startup.
         new Thread(new FFMpegLoader()).start();
 
         try {

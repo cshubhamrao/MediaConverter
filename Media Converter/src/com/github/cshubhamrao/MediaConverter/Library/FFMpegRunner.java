@@ -14,18 +14,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package com.github.cshubhamrao.MediaConverter.Library;
 
 /**
  *
  * @author Shubham Rao
  */
-public class FFMpegRunner implements Runnable{
+public class FFMpegRunner implements Runnable {
 
     @Override
     public void run() {
-        
+
     }
-    
+
 }

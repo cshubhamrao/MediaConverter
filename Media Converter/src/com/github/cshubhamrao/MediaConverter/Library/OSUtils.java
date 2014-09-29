@@ -14,81 +14,96 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package com.github.cshubhamrao.MediaConverter.Library;
 
 import java.io.File;
 import java.net.URISyntaxException;
 import org.apache.commons.exec.OS;
 
-/** This class contains various utilities to deal with OS Dependent issues like 
+/**
+ * This class contains various utilities to deal with OS Dependent issues like
  * OS Name, location of JAR file etc.
  *
  * @version 1.0.3
  * @author Shubham Rao
  */
 public class OSUtils {
-    
-    /** This enumeration contains a list of popular Operating Systems
-     * 
+
+    /**
+     * This enumeration contains a list of popular Operating Systems
+     *
      * @version 1.0.1
      * @since 1.0.0
      */
     public static enum OperatingSystem {
-        /** This constant represents Linux and/or any of its derivatives like
+
+        /**
+         * This constant represents Linux and/or any of its derivatives like
          * Debian, Fedora, Ubuntu, openSUSE etc
+         *
          * @version 1.0.0
          * @since 1.0.0
          */
         LINUX,
-        
-        /** This constant represents MacOS and Mac OSX and any of its versions
+        /**
+         * This constant represents MacOS and Mac OSX and any of its versions
+         *
          * @version 1.0.0
          * @since 1.0.0
          */
         MAC,
-
-        /** This constant represents Windows operating System and any of its
+        /**
+         * This constant represents Windows operating System and any of its
          * versions. It excludes old versions such as WindowsNT and MS-DOS
+         *
          * @version 1.0.0
          * @since 1.0.0
          */
         WINDOWS,
-
-        /** This constant represents and OS which is not any one of the above or
+        /**
+         * This constant represents and OS which is not any one of the above or
          * cannot be ascertained.
+         *
          * @version 1.0.0
          * @since 1.0.1
          */
         UNKNOWN
     }
-    
-    /** This method returns a member of {@code OperatingSystem} representing
-     * the Operating System this JAR is running from.
+
+    /**
+     * This method returns a member of {@code OperatingSystem} representing the
+     * Operating System this JAR is running from.
      *
      * @since 1.0.2
      * @return The current Operating System
      */
     public static OperatingSystem getCurrentOS() {
         OperatingSystem currentOS = OperatingSystem.UNKNOWN;
-        if (OS.isFamilyUnix()) currentOS = OperatingSystem.LINUX;
-        if (OS.isFamilyMac()) currentOS = OperatingSystem.MAC;
-        if (OS.isFamilyWindows()) currentOS = OperatingSystem.WINDOWS;
+        if (OS.isFamilyUnix()) {
+            currentOS = OperatingSystem.LINUX;
+        }
+        if (OS.isFamilyMac()) {
+            currentOS = OperatingSystem.MAC;
+        }
+        if (OS.isFamilyWindows()) {
+            currentOS = OperatingSystem.WINDOWS;
+        }
         return currentOS;
     }
 
-    /** This method gets the path to the location of the JAR file from where
-     * this is running. Code copied from 
-     * <a href="http://stackoverflow.com/a/320595">StackOverflow</a> plus some 
+    /**
+     * This method gets the path to the location of the JAR file from where this
+     * is running. Code copied from
+     * <a href="http://stackoverflow.com/a/320595">StackOverflow</a> plus some
      * contextual editing by me.
-     * 
+     *
      * @since 1.0.3
      * @return Location to the JAR file
      */
     public static File getJarLocation() {
-        File file = null; 
+        File file = null;
         try {
-            file =  new File(OSUtils.class.getProtectionDomain().getCodeSource().
+            file = new File(OSUtils.class.getProtectionDomain().getCodeSource().
                     getLocation().toURI());
         } catch (URISyntaxException ex) {
             java.util.logging.Logger.getLogger(OSUtils.class.getName())

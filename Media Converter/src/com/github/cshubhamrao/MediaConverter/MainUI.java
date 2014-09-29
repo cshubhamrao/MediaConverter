@@ -231,7 +231,16 @@ public class MainUI extends javax.swing.JFrame {
 //        ffmpegLocation = FFMpegUtils.setFFMpegExecutable();
         
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {new MainUI().setVisible(true);});
+        // FOR JDK 8
+        // java.awt.EventQueue.invokeLater(() -> {new MainUI().setVisible(true);});
+        
+        //For JDK 7
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new MainUI().setVisible(true);
+            }
+        });
         //DEBUG 
         System.out.println(ffmpegLocation);
     }

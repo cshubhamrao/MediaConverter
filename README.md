@@ -8,4 +8,4 @@ ffmpeg is the same program which powers many popular applications such as VLC Me
 As you might have guessed, to build this project, you need:
 * Netbeans IDE (We use Netbeans IDE 8)
 * Java JDK (We've used JDK 8, but JDK 6+ will work)
-* Prebuilt binanries of ffmpeg
+* Prebuilt binanries of ffmpeg (You can get it from [Zeranoe](http://ffmpeg.zeranoe.com/builds/))

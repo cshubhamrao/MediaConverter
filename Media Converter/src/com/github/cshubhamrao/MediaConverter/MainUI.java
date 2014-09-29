@@ -17,25 +17,20 @@
 
 package com.github.cshubhamrao.MediaConverter;
 
-import com.github.cshubhamrao.MediaConverter.Library.FFMpegUtils;
-import com.github.cshubhamrao.MediaConverter.Library.OSUtils;
 import java.io.File;
 import javax.swing.JOptionPane;
 
-/** This class is the main UI for the app.
+/**
+ * This class is the main UI for the app.
  *
  * @author Shubham Rao
  */
 public class MainUI extends javax.swing.JFrame {
-    
+
     /* Represents Files used by all parts of program */
-    public static File ffmpegLocation = new File ("C:/Users/Shubham/Documents/GitHub/MediaConverter/FFMpeg/ffmpeg.exe");
-//    static File ffmpegLocation = new File (FFMpegUtils.FFMPEG_EXECUTABLE.
-//                                                                     getPath());
     File inputFileLocation;
     File outputFileLocation;
-   public static File logFileLocation = new File (OSUtils.getJarLocation().getParent(),
-                                                                    "file.log");
+    public static File logFileLocation;
 
     /**
      * Creates new form MainUI
@@ -194,13 +189,12 @@ public class MainUI extends javax.swing.JFrame {
         inputFileChooser.showDialog(this, "Open this File");
         inputFile.setText(inputFileChooser.getSelectedFile().getPath());
         // Finally set inputFileLocation as text of the text bar
-        inputFileLocation = new File (inputFile.getText());
+        inputFileLocation = new File(inputFile.getText());
         // If the file doesn't exist, show an error message
-        if (!inputFileLocation.exists())
-        {
+        if (!inputFileLocation.exists()) {
             // Creates a scary error message dialog box.
             JOptionPane.showMessageDialog(this, "The input file doesn't exsist."
-                    + "\nPlease choose another file", "Inavlid file selected", 
+                    + "\nPlease choose another file", "Inavlid file selected",
                     javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_inputFileBrowseActionPerformed
@@ -210,10 +204,12 @@ public class MainUI extends javax.swing.JFrame {
         outputFileChooser.showDialog(this, "Open this File");
         outputFile.setText(outputFileChooser.getSelectedFile().getPath());
         // Finally set outputFileLocation as text of the text bar
-        outputFileLocation = new File (outputFile.getText());
+        outputFileLocation = new File(outputFile.getText());
     }//GEN-LAST:event_outputFileBrowseActionPerformed
 
-    /** This is the main method for {@code MainUI}
+    /**
+     * This is the main method for {@code MainUI}
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -221,19 +217,22 @@ public class MainUI extends javax.swing.JFrame {
             /* Set the System look and feel */
             javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager
                     .getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | InstantiationException | 
-                IllegalAccessException | 
+        } catch (ClassNotFoundException | InstantiationException |
+                IllegalAccessException |
                 javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainUI.class.getName()).log(java.
-                    util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        
-//        ffmpegLocation = FFMpegUtils.setFFMpegExecutable();
-        
+
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {new MainUI().setVisible(true);});
-        //DEBUG 
-        System.out.println(ffmpegLocation);
+        // FOR JDK 8
+        // java.awt.EventQueue.invokeLater(() -> {new MainUI().setVisible(true);});
+        //For JDK 7
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new MainUI().setVisible(true);
+            }
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -25,6 +25,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.tukaani.xz.XZInputStream;
 
 /**
  * This class extracts the ffmpeg executable from .jar file and stores it in
@@ -47,13 +48,16 @@ public class FFMpegLoader implements Runnable {
         }
 
         try (
-                OutputStream outputStream = new FileOutputStream(ffmpegExecutable);
-                InputStream inputStream = MainUI.class.getClassLoader()
-                        .getResourceAsStream(ffmpegRoot + "ffmpeg.exe")) {
+                OutputStream decompressedFFMpeg = new FileOutputStream(ffmpegExecutable);
+                InputStream rawFFMpeg = MainUI.class.getClassLoader()
+                        .getResourceAsStream(ffmpegRoot + "ffmpeg.exe.xz");
+                XZInputStream compressedFFMpeg = 
+                        new XZInputStream(rawFFMpeg) 
+            ) {
             int read = 0;
             byte[] bytes = new byte[1024];
-            while ((read = inputStream.read(bytes)) != -1) {
-                outputStream.write(bytes, 0, read);
+            while ((read = compressedFFMpeg.read(bytes)) != -1) {
+                decompressedFFMpeg.write(bytes, 0, read);
             }
         } catch (IOException e) {
             System.out.println(e.getLocalizedMessage());

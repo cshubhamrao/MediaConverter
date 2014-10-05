@@ -16,7 +16,6 @@
  */
 package com.github.cshubhamrao.MediaConverter.Library;
 
-import com.github.cshubhamrao.MediaConverter.MainUI;
 import java.io.File;
 import java.util.HashMap;
 import org.apache.commons.exec.CommandLine;

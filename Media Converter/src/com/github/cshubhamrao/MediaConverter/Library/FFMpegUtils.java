@@ -91,8 +91,7 @@ public class FFMpegUtils {
      */
     public static CommandLine buildFFMpegExecutable(File inputFile,
             File outputFile, boolean overwrite) {
-        CommandLine commandLine = new CommandLine(
-                "C:/Users/Shubham/Documents/GitHub/MediaConverter/FFMpeg/ffmpeg.exe");
+        CommandLine commandLine = new CommandLine("C:/Location to FFMpeg");
         if (overwrite) {
             commandLine.addArgument("-y");
         }

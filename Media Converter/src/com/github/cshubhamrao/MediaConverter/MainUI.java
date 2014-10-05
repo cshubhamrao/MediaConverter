@@ -185,7 +185,6 @@ public class MainUI extends javax.swing.JFrame {
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void inputFileBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputFileBrowseActionPerformed
-        // TODO add your handling code here:
         inputFileChooser.showDialog(this, "Open this File");
         inputFile.setText(inputFileChooser.getSelectedFile().getPath());
         // Finally set inputFileLocation as text of the text bar
@@ -200,7 +199,6 @@ public class MainUI extends javax.swing.JFrame {
     }//GEN-LAST:event_inputFileBrowseActionPerformed
 
     private void outputFileBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_outputFileBrowseActionPerformed
-        // TODO add your handling code here:
         outputFileChooser.showDialog(this, "Open this File");
         outputFile.setText(outputFileChooser.getSelectedFile().getPath());
         // Finally set outputFileLocation as text of the text bar

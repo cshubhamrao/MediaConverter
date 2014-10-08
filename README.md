@@ -1,5 +1,6 @@
 MediaConverter
 ==============
+[![Build Status](https://travis-ci.org/cshubhamrao/MediaConverter.svg?branch=master)](https://travis-ci.org/cshubhamrao/MediaConverter)
 
 Media Converter is a simple and easy to use media conversion and transcoding app written in Java.
 This app makes use of the popular [**__ffmpeg__**](http://ffmpeg.org "FFMpeg Project Homepage") utility. With ffmpeg you can be assured about the quality and versatility of the program.

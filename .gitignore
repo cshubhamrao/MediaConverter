@@ -45,7 +45,7 @@ Media Converter/nbactions.xml
 Media Converter/nb-configuration.xml
 
 #####################################################################
-
+!Dependencies/Apache Commons Exec/commons-exec-1.2.jar
 Dependencies/
 Media Converter/src/com/github/cshubhamrao/MediaConverter/FFMpeg/ffmpeg.exe
 Media Converter/src/com/github/cshubhamrao/MediaConverter/FFMpeg/ffmpeg.exe.xz

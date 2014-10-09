@@ -34,7 +34,7 @@ import org.tukaani.xz.XZInputStream;
  */
 public class FFMpegLoader implements Runnable {
 
-    File ffmpegExecutable;
+    File ffmpegExecutable = null;
     private final String ffmpegRoot = "com/github/cshubhamrao/MediaConverter/FFMpeg/";
 
     @Override

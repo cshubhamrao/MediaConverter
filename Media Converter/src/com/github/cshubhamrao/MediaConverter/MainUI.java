@@ -59,9 +59,10 @@ public class MainUI extends javax.swing.JFrame {
         outputFileBrowse = new javax.swing.JButton();
         startButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        outputArea = new javax.swing.JTextArea();
-        outputLogButton = new javax.swing.JButton();
+        progressBar = new javax.swing.JProgressBar();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        outputLogLabel = new javax.swing.JLabel();
 
         inputFileChooser.setCurrentDirectory(new java.io.File("C:\\Users\\Shubham\\Videos"));
         inputFileChooser.setDialogTitle("Open file for conversion");
@@ -137,11 +138,14 @@ public class MainUI extends javax.swing.JFrame {
             }
         });
 
-        outputArea.setColumns(20);
-        outputArea.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jScrollPane1.setViewportView(outputArea);
+        progressBar.setName(""); // NOI18N
+        progressBar.setStringPainted(true);
 
-        outputLogButton.setText("Show Output Log");
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
+
+        outputLogLabel.setText("Output Log");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -150,14 +154,15 @@ public class MainUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
-                    .addComponent(filePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
+                    .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(exitButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(startButton))
+                    .addComponent(filePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(outputLogButton)
+                        .addComponent(outputLogLabel)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -166,14 +171,16 @@ public class MainUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(filePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(outputLogButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(outputLogLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(startButton)
-                    .addComponent(exitButton))
+                    .addComponent(exitButton)
+                    .addComponent(startButton))
                 .addContainerGap())
         );
 
@@ -184,6 +191,13 @@ public class MainUI extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_exitButtonActionPerformed
 
+    private void outputFileBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_outputFileBrowseActionPerformed
+        outputFileChooser.showDialog(this, "Open this File");
+        outputFile.setText(outputFileChooser.getSelectedFile().getPath());
+        // Finally set outputFileLocation as text of the text bar
+        outputFileLocation = new File(outputFile.getText());
+    }//GEN-LAST:event_outputFileBrowseActionPerformed
+
     private void inputFileBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputFileBrowseActionPerformed
         inputFileChooser.showDialog(this, "Open this File");
         inputFile.setText(inputFileChooser.getSelectedFile().getPath());
@@ -193,17 +207,10 @@ public class MainUI extends javax.swing.JFrame {
         if (!inputFileLocation.exists()) {
             // Creates a scary error message dialog box.
             JOptionPane.showMessageDialog(this, "The input file doesn't exsist."
-                    + "\nPlease choose another file", "Inavlid file selected",
-                    javax.swing.JOptionPane.ERROR_MESSAGE);
+                + "\nPlease choose another file", "Inavlid file selected",
+                javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_inputFileBrowseActionPerformed
-
-    private void outputFileBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_outputFileBrowseActionPerformed
-        outputFileChooser.showDialog(this, "Open this File");
-        outputFile.setText(outputFileChooser.getSelectedFile().getPath());
-        // Finally set outputFileLocation as text of the text bar
-        outputFileLocation = new File(outputFile.getText());
-    }//GEN-LAST:event_outputFileBrowseActionPerformed
 
     /**
      * This is the main method for {@code MainUI}
@@ -250,13 +257,14 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JButton inputFileBrowse;
     private javax.swing.JFileChooser inputFileChooser;
     private javax.swing.JLabel inputFileLabel;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea outputArea;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField outputFile;
     private javax.swing.JButton outputFileBrowse;
     private javax.swing.JFileChooser outputFileChooser;
     private javax.swing.JLabel outputFileLabel;
-    private javax.swing.JButton outputLogButton;
+    private javax.swing.JLabel outputLogLabel;
+    private javax.swing.JProgressBar progressBar;
     private javax.swing.JButton startButton;
     // End of variables declaration//GEN-END:variables
 }

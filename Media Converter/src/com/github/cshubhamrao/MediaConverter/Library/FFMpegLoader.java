@@ -44,6 +44,7 @@ public class FFMpegLoader implements Runnable {
             ffmpegExecutable.deleteOnExit();
         } catch (IOException ex) {
             Logger.getLogger(FFMpegLoader.class.getName()).log(Level.SEVERE, null, ex);
+            ffmpegExecutable = null;
         }
 
         try (
@@ -60,6 +61,7 @@ public class FFMpegLoader implements Runnable {
             }
         } catch (IOException e) {
             System.out.println(e.getLocalizedMessage());
+            ffmpegExecutable = null;
         }
 
     }

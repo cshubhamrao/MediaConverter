@@ -219,9 +219,10 @@ public class MainUI extends javax.swing.JFrame {
             /* Set the Nimbus look and feel */
             for (javax.swing.UIManager.LookAndFeelInfo lafInfo : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if (lafInfo.getName().equals("Nimbus")) {
+                    System.out.println(lafInfo.getName());
                     javax.swing.UIManager.setLookAndFeel(lafInfo.getClassName());
                 } else {
-                    javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+//                    javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
                 }
             }
         } catch (ClassNotFoundException | InstantiationException |

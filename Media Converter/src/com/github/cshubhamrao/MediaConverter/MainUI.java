@@ -18,6 +18,9 @@ package com.github.cshubhamrao.MediaConverter;
 
 import com.github.cshubhamrao.MediaConverter.Library.FFMpegLoader;
 import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -30,7 +33,7 @@ public class MainUI extends javax.swing.JFrame {
     /* Represents Files used by all parts of program */
     File inputFileLocation;
     File outputFileLocation;
-    public static File logFileLocation;
+    public static File logFile;
 
     /**
      * Creates new form MainUI
@@ -207,8 +210,8 @@ public class MainUI extends javax.swing.JFrame {
         if (!inputFileLocation.exists()) {
             // Creates a scary error message dialog box.
             JOptionPane.showMessageDialog(this, "The input file doesn't exsist."
-                + "\nPlease choose another file", "Inavlid file selected",
-                javax.swing.JOptionPane.ERROR_MESSAGE);
+                    + "\nPlease choose another file", "Inavlid file selected",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_inputFileBrowseActionPerformed
 
@@ -218,6 +221,12 @@ public class MainUI extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+
+        try {
+            logFile = File.createTempFile("MediaConverter", ".txt");
+        } catch (IOException ex) {
+            Logger.getLogger(MainUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         // Create the FFMpeg executable in %temp% on startup.
         new Thread(new FFMpegLoader()).start();

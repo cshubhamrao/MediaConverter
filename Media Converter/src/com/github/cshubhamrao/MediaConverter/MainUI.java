@@ -216,9 +216,14 @@ public class MainUI extends javax.swing.JFrame {
         new Thread(new FFMpegLoader()).start();
 
         try {
-            /* Set the System look and feel */
-            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager
-                    .getSystemLookAndFeelClassName());
+            /* Set the Nimbus look and feel */
+            for (javax.swing.UIManager.LookAndFeelInfo lafInfo : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if (lafInfo.getName().equals("Nimbus")) {
+                    javax.swing.UIManager.setLookAndFeel(lafInfo.getClassName());
+                } else {
+                    javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+                }
+            }
         } catch (ClassNotFoundException | InstantiationException |
                 IllegalAccessException |
                 javax.swing.UnsupportedLookAndFeelException ex) {

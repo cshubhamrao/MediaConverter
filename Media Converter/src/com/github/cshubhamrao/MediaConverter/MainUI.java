@@ -17,11 +17,17 @@
 package com.github.cshubhamrao.MediaConverter;
 
 import com.github.cshubhamrao.MediaConverter.Library.FFMpegLoader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
+import org.apache.commons.exec.CommandLine;
+import org.apache.commons.exec.DefaultExecutor;
+import org.apache.commons.exec.PumpStreamHandler;
 
 /**
  * This class is the main UI for the app.
@@ -64,7 +70,7 @@ public class MainUI extends javax.swing.JFrame {
         exitButton = new javax.swing.JButton();
         progressBar = new javax.swing.JProgressBar();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        outputArea = new javax.swing.JTextArea();
         outputLogLabel = new javax.swing.JLabel();
 
         inputFileChooser.setCurrentDirectory(new java.io.File("C:\\Users\\Shubham\\Videos"));
@@ -133,6 +139,11 @@ public class MainUI extends javax.swing.JFrame {
         );
 
         startButton.setText("Start");
+        startButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startButtonActionPerformed(evt);
+            }
+        });
 
         exitButton.setText("Exit");
         exitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -144,9 +155,9 @@ public class MainUI extends javax.swing.JFrame {
         progressBar.setName(""); // NOI18N
         progressBar.setStringPainted(true);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        outputArea.setColumns(20);
+        outputArea.setRows(5);
+        jScrollPane2.setViewportView(outputArea);
 
         outputLogLabel.setText("Output Log");
 
@@ -215,6 +226,10 @@ public class MainUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_inputFileBrowseActionPerformed
 
+    private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
+        new FFMpegRunner().execute();
+    }//GEN-LAST:event_startButtonActionPerformed
+
     /**
      * This is the main method for {@code MainUI}
      *
@@ -267,7 +282,7 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JFileChooser inputFileChooser;
     private javax.swing.JLabel inputFileLabel;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea outputArea;
     private javax.swing.JTextField outputFile;
     private javax.swing.JButton outputFileBrowse;
     private javax.swing.JFileChooser outputFileChooser;
@@ -276,4 +291,54 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JButton startButton;
     // End of variables declaration//GEN-END:variables
+
+    public class FFMpegRunner extends SwingWorker<Void, String> {
+
+        File ffmpegExecutable;
+        MainUI ui;
+
+        FFMpegRunner() {
+            ffmpegExecutable = FFMpegLoader.getFFMpegExecutable();
+
+            if (ffmpegExecutable == null) {
+                System.out.println("ERROR");
+            }
+        }
+
+        @Override
+        protected Void doInBackground() {
+            if (ffmpegExecutable != null) {
+                CommandLine cmd = new CommandLine(ffmpegExecutable);
+
+                ByteArrayOutputStream out = new ByteArrayOutputStream();
+                ByteArrayOutputStream err = new ByteArrayOutputStream();
+
+                PumpStreamHandler psh = new PumpStreamHandler(out, err);
+                cmd.addArgument("-h");
+                cmd.addArgument("full");
+                DefaultExecutor exec = new DefaultExecutor();
+                exec.setStreamHandler(psh);
+                try {
+                    exec.execute(cmd);
+                    publish("Executing FFMpeg");
+                } catch (IOException ex) {
+                    publish("ERROR");
+                }
+
+                String errString = err.toString() ;
+                String[] errArray = errString.split("\n");
+                String versionString = errArray[0];
+                publish(versionString);
+                publish(err.toString());
+            }
+            return null;
+        }
+
+        @Override
+        protected void process(List<String> chunks) {
+            for (String chunk : chunks) {
+                outputArea.setText(chunk);
+            }
+        }
+    }
 }

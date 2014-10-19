@@ -66,7 +66,7 @@ public class FFMpegLoader implements Runnable {
 
     }
     
-    static File getFFMpegExecutable() {
+    public static File getFFMpegExecutable() {
         return ffmpegExecutable;
     }
 }

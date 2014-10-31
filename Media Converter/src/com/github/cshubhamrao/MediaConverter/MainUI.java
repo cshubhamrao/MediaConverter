@@ -37,8 +37,8 @@ import org.apache.commons.exec.PumpStreamHandler;
 public class MainUI extends javax.swing.JFrame {
 
     /* Represents Files used by all parts of program */
-    File inputFileLocation;
-    File outputFileLocation;
+    File inputFileLocation = null;
+    File outputFileLocation = null;
     public static File logFile;
 
     /**
@@ -325,7 +325,7 @@ public class MainUI extends javax.swing.JFrame {
                     publish("ERROR");
                 }
 
-                String errString = err.toString() ;
+                String errString = err.toString();
                 String[] errArray = errString.split("\n");
                 String versionString = errArray[0];
                 publish(versionString);

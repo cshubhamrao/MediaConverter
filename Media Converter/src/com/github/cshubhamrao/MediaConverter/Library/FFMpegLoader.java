@@ -33,8 +33,13 @@ import org.tukaani.xz.XZInputStream;
  * @author Shubham
  */
 public class FFMpegLoader implements Runnable {
+    
+    static File getFFMpegExecutable() {
+        if (ffmpegExecutable != null) return ffmpegExecutable;
+        else return null;
+    }
 
-    File ffmpegExecutable;
+    static File ffmpegExecutable;
     private final String ffmpegRoot = "com/github/cshubhamrao/MediaConverter/FFMpeg/";
 
     @Override

@@ -17,9 +17,17 @@
 package com.github.cshubhamrao.MediaConverter;
 
 import com.github.cshubhamrao.MediaConverter.Library.FFMpegLoader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 import javax.swing.SwingWorker;
+import org.apache.commons.exec.*;
 
 /**
  * This class is the main UI for the app.
@@ -28,7 +36,9 @@ import javax.swing.SwingWorker;
  */
 public class MainUI extends javax.swing.JFrame {
 
-    /* Represents Files used by all parts of program */
+    /*
+     * Represents Files used by all parts of program
+     */
     File inputFileLocation;
     File outputFileLocation;
     public static File logFileLocation;
@@ -63,6 +73,7 @@ public class MainUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         outputArea = new javax.swing.JTextArea();
         outputLogButton = new javax.swing.JButton();
+        versionInfo = new javax.swing.JButton();
 
         inputFileChooser.setCurrentDirectory(new java.io.File("C:\\Users\\Shubham\\Videos"));
         inputFileChooser.setDialogTitle("Open file for conversion");
@@ -144,6 +155,13 @@ public class MainUI extends javax.swing.JFrame {
 
         outputLogButton.setText("Show Output Log");
 
+        versionInfo.setText("Display Version");
+        versionInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                versionInfoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -156,6 +174,8 @@ public class MainUI extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(exitButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(versionInfo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(startButton))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(outputLogButton)
@@ -167,14 +187,15 @@ public class MainUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(filePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(outputLogButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(startButton)
-                    .addComponent(exitButton))
+                    .addComponent(exitButton)
+                    .addComponent(versionInfo))
                 .addContainerGap())
         );
 
@@ -206,6 +227,10 @@ public class MainUI extends javax.swing.JFrame {
         outputFileLocation = new File(outputFile.getText());
     }//GEN-LAST:event_outputFileBrowseActionPerformed
 
+    private void versionInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_versionInfoActionPerformed
+        new DisplayVersion(outputArea).execute();
+    }//GEN-LAST:event_versionInfoActionPerformed
+
     /**
      * This is the main method for {@code MainUI}
      *
@@ -217,7 +242,9 @@ public class MainUI extends javax.swing.JFrame {
         new Thread(new FFMpegLoader()).start();
 
         try {
-            /* Set the Nimbus look and feel */
+            /*
+             * Set the Nimbus look and feel
+             */
             for (javax.swing.UIManager.LookAndFeelInfo lafInfo : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if (lafInfo.getName().equals("Nimbus")) {
                     System.out.println(lafInfo.getName());
@@ -232,18 +259,20 @@ public class MainUI extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
-        /* Create and display the form */
+        /*
+         * Create and display the form
+         */
         // FOR JDK 8
         // java.awt.EventQueue.invokeLater(() -> {new MainUI().setVisible(true);});
         //For JDK 7
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             @Override
             public void run() {
                 new MainUI().setVisible(true);
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton exitButton;
     private javax.swing.JPanel filePanel;
@@ -259,12 +288,59 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JLabel outputFileLabel;
     private javax.swing.JButton outputLogButton;
     private javax.swing.JButton startButton;
+    private javax.swing.JButton versionInfo;
     // End of variables declaration//GEN-END:variables
 }
-class RunFFMpeg extends SwingWorker<String, Void> {
+
+class DisplayVersion extends SwingWorker<Void, String> {
+
+    File ffmpeg;
+    CommandLine cmd;
+    JTextArea outputArea;
+
+    DisplayVersion(JTextArea where) {
+        this.outputArea = where;
+    }
 
     @Override
-    protected String doInBackground() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet.");
+    protected Void doInBackground() {
+        ffmpeg = FFMpegLoader.getFFMpegExecutable();
+        while (!isCancelled()) {
+            if (ffmpeg != null) {
+                try {
+                    cmd = new CommandLine(ffmpeg);
+                    cmd.addArgument("-version");
+                    OutputStream outputStream = new ByteArrayOutputStream();
+                    DefaultExecutor exec = new DefaultExecutor();
+                    PumpStreamHandler streamHandler = new PumpStreamHandler(outputStream);
+                    exec.setStreamHandler(streamHandler);
+                    ExecuteWatchdog watchdog = new ExecuteWatchdog(10000);
+                    exec.setWatchdog(watchdog);
+                    exec.execute(cmd);
+                    publish(outputStream.toString());
+                } catch (ExecuteException ex) {
+                    Logger.getLogger(DisplayVersion.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(DisplayVersion.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else 
+            {
+                try {
+                    Thread.sleep(1000);
+                    continue;
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(DisplayVersion.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    protected void process(List<String> chunks) {
+        for (String versionInfo : chunks) {
+            outputArea.setText(versionInfo);
+        }
     }
 }

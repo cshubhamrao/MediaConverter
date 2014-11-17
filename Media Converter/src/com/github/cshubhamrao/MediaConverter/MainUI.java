@@ -19,6 +19,7 @@ package com.github.cshubhamrao.MediaConverter;
 import com.github.cshubhamrao.MediaConverter.Library.FFMpegLoader;
 import java.io.File;
 import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 
 /**
  * This class is the main UI for the app.
@@ -259,4 +260,11 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JButton outputLogButton;
     private javax.swing.JButton startButton;
     // End of variables declaration//GEN-END:variables
+}
+class RunFFMpeg extends SwingWorker<String, Void> {
+
+    @Override
+    protected String doInBackground() throws Exception {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

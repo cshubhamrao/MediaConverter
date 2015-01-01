@@ -24,7 +24,7 @@ import org.apache.commons.exec.OS;
  * This class contains various utilities to deal with OS Dependent issues like
  * OS Name, location of JAR file etc.
  *
- * @version 1.0.3
+ * @version 2.0.0
  * @author Shubham Rao
  */
 public class OSUtils {

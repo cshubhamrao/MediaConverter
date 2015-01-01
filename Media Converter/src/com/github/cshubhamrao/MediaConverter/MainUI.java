@@ -17,11 +17,20 @@
 package com.github.cshubhamrao.MediaConverter;
 
 import com.github.cshubhamrao.MediaConverter.Library.FFMpegLoader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+<<<<<<< HEAD
+=======
+import java.io.OutputStream;
+import java.util.List;
+>>>>>>> origin/master
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import javax.swing.SwingWorker;
+import org.apache.commons.exec.*;
 
 /**
  * This class is the main UI for the app.
@@ -30,7 +39,9 @@ import javax.swing.JOptionPane;
  */
 public class MainUI extends javax.swing.JFrame {
 
-    /* Represents Files used by all parts of program */
+    /*
+     * Represents Files used by all parts of program
+     */
     File inputFileLocation;
     File outputFileLocation;
     public static File logFile;
@@ -62,10 +73,17 @@ public class MainUI extends javax.swing.JFrame {
         outputFileBrowse = new javax.swing.JButton();
         startButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
+<<<<<<< HEAD
         progressBar = new javax.swing.JProgressBar();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         outputLogLabel = new javax.swing.JLabel();
+=======
+        jScrollPane1 = new javax.swing.JScrollPane();
+        outputArea = new javax.swing.JTextArea();
+        outputLogButton = new javax.swing.JButton();
+        versionInfo = new javax.swing.JButton();
+>>>>>>> origin/master
 
         inputFileChooser.setCurrentDirectory(new java.io.File("C:\\Users\\Shubham\\Videos"));
         inputFileChooser.setDialogTitle("Open file for conversion");
@@ -150,6 +168,13 @@ public class MainUI extends javax.swing.JFrame {
 
         outputLogLabel.setText("Output Log");
 
+        versionInfo.setText("Display Version");
+        versionInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                versionInfoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -162,6 +187,8 @@ public class MainUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(exitButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(versionInfo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(startButton))
                     .addComponent(filePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
@@ -174,6 +201,7 @@ public class MainUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(filePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+<<<<<<< HEAD
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(outputLogLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -184,6 +212,17 @@ public class MainUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(exitButton)
                     .addComponent(startButton))
+=======
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(outputLogButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(startButton)
+                    .addComponent(exitButton)
+                    .addComponent(versionInfo))
+>>>>>>> origin/master
                 .addContainerGap())
         );
 
@@ -215,6 +254,20 @@ public class MainUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_inputFileBrowseActionPerformed
 
+<<<<<<< HEAD
+=======
+    private void outputFileBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_outputFileBrowseActionPerformed
+        outputFileChooser.showDialog(this, "Open this File");
+        outputFile.setText(outputFileChooser.getSelectedFile().getPath());
+        // Finally set outputFileLocation as text of the text bar
+        outputFileLocation = new File(outputFile.getText());
+    }//GEN-LAST:event_outputFileBrowseActionPerformed
+
+    private void versionInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_versionInfoActionPerformed
+        new DisplayVersion(outputArea).execute();
+    }//GEN-LAST:event_versionInfoActionPerformed
+
+>>>>>>> origin/master
     /**
      * This is the main method for {@code MainUI}
      *
@@ -232,7 +285,9 @@ public class MainUI extends javax.swing.JFrame {
         new Thread(new FFMpegLoader()).start();
 
         try {
-            /* Set the Nimbus look and feel */
+            /*
+             * Set the Nimbus look and feel
+             */
             for (javax.swing.UIManager.LookAndFeelInfo lafInfo : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if (lafInfo.getName().equals("Nimbus")) {
                     System.out.println(lafInfo.getName());
@@ -247,18 +302,20 @@ public class MainUI extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
-        /* Create and display the form */
+        /*
+         * Create and display the form
+         */
         // FOR JDK 8
         // java.awt.EventQueue.invokeLater(() -> {new MainUI().setVisible(true);});
         //For JDK 7
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             @Override
             public void run() {
                 new MainUI().setVisible(true);
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton exitButton;
     private javax.swing.JPanel filePanel;
@@ -275,5 +332,59 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JLabel outputLogLabel;
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JButton startButton;
+    private javax.swing.JButton versionInfo;
     // End of variables declaration//GEN-END:variables
+}
+
+class DisplayVersion extends SwingWorker<Void, String> {
+
+    File ffmpeg;
+    CommandLine cmd;
+    JTextArea outputArea;
+
+    DisplayVersion(JTextArea where) {
+        this.outputArea = where;
+    }
+
+    @Override
+    protected Void doInBackground() {
+        ffmpeg = FFMpegLoader.getFFMpegExecutable();
+        while (!isCancelled()) {
+            if (ffmpeg != null) {
+                try {
+                    cmd = new CommandLine(ffmpeg);
+                    cmd.addArgument("-version");
+                    OutputStream outputStream = new ByteArrayOutputStream();
+                    DefaultExecutor exec = new DefaultExecutor();
+                    PumpStreamHandler streamHandler = new PumpStreamHandler(outputStream);
+                    exec.setStreamHandler(streamHandler);
+                    ExecuteWatchdog watchdog = new ExecuteWatchdog(10000);
+                    exec.setWatchdog(watchdog);
+                    exec.execute(cmd);
+                    publish(outputStream.toString());
+                } catch (ExecuteException ex) {
+                    Logger.getLogger(DisplayVersion.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(DisplayVersion.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else 
+            {
+                try {
+                    Thread.sleep(1000);
+                    continue;
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(DisplayVersion.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    protected void process(List<String> chunks) {
+        for (String versionInfo : chunks) {
+            outputArea.setText(versionInfo);
+        }
+    }
 }

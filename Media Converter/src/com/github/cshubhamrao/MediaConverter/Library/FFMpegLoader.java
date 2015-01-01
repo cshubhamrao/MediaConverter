@@ -17,6 +17,7 @@
 package com.github.cshubhamrao.MediaConverter.Library;
 
 import com.github.cshubhamrao.MediaConverter.MainUI;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -34,7 +35,7 @@ import org.tukaani.xz.XZInputStream;
  */
 public class FFMpegLoader implements Runnable {
 
-    File ffmpegExecutable;
+    static File ffmpegExecutable;
     private final String ffmpegRoot = "com/github/cshubhamrao/MediaConverter/FFMpeg/";
 
     @Override
@@ -63,4 +64,10 @@ public class FFMpegLoader implements Runnable {
         }
 
     }
+    
+    public static File getFFMpegExecutable() {
+        if (ffmpegExecutable != null) return ffmpegExecutable;
+        else return null;
+    }
+    
 }

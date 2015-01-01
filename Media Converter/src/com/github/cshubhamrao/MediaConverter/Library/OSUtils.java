@@ -91,24 +91,4 @@ public class OSUtils {
         return currentOS;
     }
 
-    /**
-     * This method gets the path to the location of the JAR file from where this
-     * is running. Code copied from
-     * <a href="http://stackoverflow.com/a/320595">StackOverflow</a> plus some
-     * contextual editing by me.
-     *
-     * @since 1.0.3
-     * @return Location to the JAR file
-     */
-    public static File getJarLocation() {
-        File file = null;
-        try {
-            file = new File(OSUtils.class.getProtectionDomain().getCodeSource().
-                    getLocation().toURI());
-        } catch (URISyntaxException ex) {
-            java.util.logging.Logger.getLogger(OSUtils.class.getName())
-                    .log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        return file;
-    }
 }

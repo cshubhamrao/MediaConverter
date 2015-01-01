@@ -20,11 +20,8 @@ import com.github.cshubhamrao.MediaConverter.Library.FFMpegLoader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-<<<<<<< HEAD
-=======
 import java.io.OutputStream;
 import java.util.List;
->>>>>>> origin/master
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -73,17 +70,14 @@ public class MainUI extends javax.swing.JFrame {
         outputFileBrowse = new javax.swing.JButton();
         startButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
-<<<<<<< HEAD
         progressBar = new javax.swing.JProgressBar();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         outputLogLabel = new javax.swing.JLabel();
-=======
         jScrollPane1 = new javax.swing.JScrollPane();
         outputArea = new javax.swing.JTextArea();
         outputLogButton = new javax.swing.JButton();
         versionInfo = new javax.swing.JButton();
->>>>>>> origin/master
 
         inputFileChooser.setCurrentDirectory(new java.io.File("C:\\Users\\Shubham\\Videos"));
         inputFileChooser.setDialogTitle("Open file for conversion");
@@ -201,7 +195,6 @@ public class MainUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(filePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-<<<<<<< HEAD
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(outputLogLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -212,7 +205,6 @@ public class MainUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(exitButton)
                     .addComponent(startButton))
-=======
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(outputLogButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -222,7 +214,6 @@ public class MainUI extends javax.swing.JFrame {
                     .addComponent(startButton)
                     .addComponent(exitButton)
                     .addComponent(versionInfo))
->>>>>>> origin/master
                 .addContainerGap())
         );
 
@@ -254,20 +245,10 @@ public class MainUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_inputFileBrowseActionPerformed
 
-<<<<<<< HEAD
-=======
-    private void outputFileBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_outputFileBrowseActionPerformed
-        outputFileChooser.showDialog(this, "Open this File");
-        outputFile.setText(outputFileChooser.getSelectedFile().getPath());
-        // Finally set outputFileLocation as text of the text bar
-        outputFileLocation = new File(outputFile.getText());
-    }//GEN-LAST:event_outputFileBrowseActionPerformed
-
-    private void versionInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_versionInfoActionPerformed
+  private void versionInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_versionInfoActionPerformed
         new DisplayVersion(outputArea).execute();
     }//GEN-LAST:event_versionInfoActionPerformed
 
->>>>>>> origin/master
     /**
      * This is the main method for {@code MainUI}
      *

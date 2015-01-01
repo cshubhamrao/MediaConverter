@@ -69,27 +69,21 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="filePanel" min="-2" max="-2" attributes="0"/>
-<<<<<<< HEAD
               <EmptySpace max="-2" attributes="0"/>
               <Component id="outputLogLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane2" max="32767" attributes="0"/>
-=======
               <EmptySpace max="-2" attributes="0"/>
               <Component id="outputLogButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" pref="75" max="32767" attributes="0"/>
->>>>>>> origin/master
               <EmptySpace max="-2" attributes="0"/>
               <Component id="progressBar" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="exitButton" alignment="3" min="-2" max="-2" attributes="0"/>
-<<<<<<< HEAD
                   <Component id="startButton" alignment="3" min="-2" max="-2" attributes="0"/>
-=======
                   <Component id="versionInfo" alignment="3" min="-2" max="-2" attributes="0"/>
->>>>>>> origin/master
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>

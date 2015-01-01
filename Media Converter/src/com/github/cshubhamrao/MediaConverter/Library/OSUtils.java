@@ -16,8 +16,6 @@
  */
 package com.github.cshubhamrao.MediaConverter.Library;
 
-import java.io.File;
-import java.net.URISyntaxException;
 import org.apache.commons.exec.OS;
 
 /**

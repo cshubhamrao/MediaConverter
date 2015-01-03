@@ -329,7 +329,6 @@ class DisplayVersion extends SwingWorker<Void, String> {
     @Override
     protected Void doInBackground() {
         ffmpeg = FFMpegLoader.getFFMpegExecutable();
-        while (!isCancelled()) {
             if (ffmpeg != null) {
                 try {
                     cmd = new CommandLine(ffmpeg);
@@ -352,12 +351,10 @@ class DisplayVersion extends SwingWorker<Void, String> {
             {
                 try {
                     Thread.sleep(1000);
-                    continue;
                 } catch (InterruptedException ex) {
                     Logger.getLogger(DisplayVersion.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-        }
         return null;
     }
 

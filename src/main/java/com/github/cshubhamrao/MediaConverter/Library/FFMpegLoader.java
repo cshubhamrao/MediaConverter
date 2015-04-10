@@ -36,7 +36,6 @@ import org.tukaani.xz.XZInputStream;
 public class FFMpegLoader implements Runnable {
 
     static File ffmpegExecutable;
-    private final String ffmpegRoot = "com/github/cshubhamrao/MediaConverter/FFMpeg/";
 
     @Override
     public void run() {
@@ -50,7 +49,7 @@ public class FFMpegLoader implements Runnable {
         try (
                 OutputStream decompressedFFMpeg = new FileOutputStream(ffmpegExecutable);
                 InputStream rawFFMpeg = MainUI.class.getClassLoader()
-                        .getResourceAsStream(ffmpegRoot + "ffmpeg.exe.xz");
+                        .getResourceAsStream("ffmpeg.exe.xz");
                 XZInputStream compressedFFMpeg = 
                         new XZInputStream(rawFFMpeg) 
             ) {

@@ -28,6 +28,11 @@
             <artifactId>commons-exec</artifactId>
             <version>1.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-resources-plugin</artifactId>
+            <version>2.5</version>
+        </dependency>
     </dependencies>
     <reporting>
         <plugins>

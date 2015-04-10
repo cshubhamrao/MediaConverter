@@ -50,3 +50,4 @@ Dependencies/
 Media Converter/src/com/github/cshubhamrao/MediaConverter/FFMpeg/ffmpeg.exe
 
 *.stackdump
+/target/

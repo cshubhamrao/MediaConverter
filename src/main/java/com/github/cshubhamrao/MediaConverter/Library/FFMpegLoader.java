@@ -16,6 +16,7 @@
  */
 package com.github.cshubhamrao.MediaConverter.Library;
 
+import com.github.cshubhamrao.MediaConverter.Library.OSUtils.OperatingSystem;
 import com.github.cshubhamrao.MediaConverter.MainUI;
 
 import java.io.File;
@@ -34,11 +35,28 @@ import org.tukaani.xz.XZInputStream;
  * @author Shubham
  */
 public class FFMpegLoader implements Runnable {
+    
+    static final String WINDOWS_FFMPEG = "ffmpeg.exe.xz";
+    static final String LINUX_FFMPEG = "ffmpeg.xz";
 
     static File ffmpegExecutable;
 
     @Override
     public void run() {
+        
+        String ffmpegResource = "";
+        
+        switch(OSUtils.getCurrentOS())
+        {
+            case WINDOWS:
+                ffmpegResource = WINDOWS_FFMPEG;
+                break;
+                
+            case LINUX:
+                ffmpegResource = LINUX_FFMPEG;
+                break;
+        }
+        
         try {
             ffmpegExecutable = File.createTempFile("MediaConverter", ".exe");
             ffmpegExecutable.deleteOnExit();
@@ -49,7 +67,7 @@ public class FFMpegLoader implements Runnable {
         try (
                 OutputStream decompressedFFMpeg = new FileOutputStream(ffmpegExecutable);
                 InputStream rawFFMpeg = MainUI.class.getClassLoader()
-                        .getResourceAsStream("ffmpeg.exe.xz");
+                        .getResourceAsStream(ffmpegResource);
                 XZInputStream compressedFFMpeg = 
                         new XZInputStream(rawFFMpeg) 
             ) {

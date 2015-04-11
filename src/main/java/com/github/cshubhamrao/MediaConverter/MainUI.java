@@ -33,6 +33,7 @@ import org.apache.commons.exec.*;
  * This class is the main UI for the app.
  *
  * @author Shubham Rao
+ * @version 0.1.0
  */
 public class MainUI extends javax.swing.JFrame {
 
@@ -165,6 +166,7 @@ public class MainUI extends javax.swing.JFrame {
 
         outputArea.setColumns(20);
         outputArea.setRows(5);
+        outputArea.setText("Version: 0.1.0 Pre Alpha");
         jScrollPane2.setViewportView(outputArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

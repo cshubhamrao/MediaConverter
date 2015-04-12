@@ -42,6 +42,7 @@ public class MainUI extends javax.swing.JFrame {
      */
     File inputFileLocation;
     File outputFileLocation;
+    /** Constant <code>logFile</code> */
     public static File logFile;
 
     /**
@@ -328,6 +329,7 @@ class DisplayVersion extends SwingWorker<Void, String> {
         this.outputArea = where;
     }
 
+    /** Runs ffmpeg -version */
     @Override
     protected Void doInBackground() {
         ffmpeg = FFMpegLoader.getFFMpegExecutable();
@@ -360,6 +362,7 @@ class DisplayVersion extends SwingWorker<Void, String> {
         return null;
     }
 
+    /** Shows output on  textArea */
     @Override
     protected void process(List<String> chunks) {
         for (String versionInfo : chunks) {

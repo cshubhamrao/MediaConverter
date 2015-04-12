@@ -19,8 +19,7 @@ package com.github.cshubhamrao.MediaConverter.Library;
 import org.apache.commons.exec.OS;
 
 /**
- * This class contains various utilities to deal with OS Dependent issues like
- * OS Name, location of JAR file etc.
+ * This class contains various utilities to deal with OS Dependent issues (OS Name).
  *
  * @version 2.0.0
  * @author Shubham Rao
@@ -59,7 +58,7 @@ public class OSUtils {
          */
         WINDOWS,
         /**
-         * This constant represents and OS which is not any one of the above or
+         * This constant represents an OS which is not any one of the above or
          * cannot be ascertained.
          *
          * @version 1.0.0
@@ -70,10 +69,10 @@ public class OSUtils {
 
     /**
      * This method returns a member of {@code OperatingSystem} representing the
-     * Operating System this JAR is running from.
+     * current Operating System.
      *
      * @since 1.0.2
-     * @return The current Operating System
+     * @return Current Operating System
      */
     public static OperatingSystem getCurrentOS() {
         OperatingSystem currentOS = OperatingSystem.UNKNOWN;

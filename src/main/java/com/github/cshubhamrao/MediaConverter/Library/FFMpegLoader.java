@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Shubham
+ * Copyright (C) 2015 Shubham
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,14 +29,17 @@ import java.util.logging.Logger;
 import org.tukaani.xz.XZInputStream;
 
 /**
- * This class extracts the ffmpeg executable from .jar file and stores it in
- * %temp%
+ * This class extracts the compressed ffmpeg executable, decompresses it 
+ * and stores it in %temp%
  *
  * @author Shubham
  * @version 1.0.0
  */
 public class FFMpegLoader implements Runnable {
     
+    /* Filenames of executables to use for each platform. Edit here if file 
+       renamed/moved
+    */
     static final String WINDOWS_FFMPEG = "ffmpeg.exe.xz";
     static final String LINUX_FFMPEG = "ffmpeg.xz";
 
@@ -59,6 +62,7 @@ public class FFMpegLoader implements Runnable {
         }
         
         try {
+            // Created file will be MediaConverter<some numbers>.exe
             ffmpegExecutable = File.createTempFile("MediaConverter", ".exe");
             ffmpegExecutable.deleteOnExit();
         } catch (IOException ex) {
@@ -83,6 +87,12 @@ public class FFMpegLoader implements Runnable {
 
     }
     
+    /**
+     *  
+     *
+     * @return a {@link java.io.File} object for the executable, <code>null</code>
+     *         if executable couldn't be created.
+     */
     public static File getFFMpegExecutable() {
         if (ffmpegExecutable != null) return ffmpegExecutable;
         else return null;

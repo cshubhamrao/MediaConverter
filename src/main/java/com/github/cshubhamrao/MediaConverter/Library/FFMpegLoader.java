@@ -29,8 +29,8 @@ import java.util.logging.Logger;
 import org.tukaani.xz.XZInputStream;
 
 /**
- * This class extracts the ffmpeg executable from .jar file and stores it in
- * %temp%
+ * This class extracts the compressed ffmpeg executable, decompresses it 
+ * and stores it in %temp%
  *
  * @author Shubham
  * @version 1.0.0

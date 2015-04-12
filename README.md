@@ -7,8 +7,8 @@ This app makes use of the popular [**__ffmpeg__**](http://ffmpeg.org "FFMpeg Pro
 ffmpeg is the same program which powers many popular applications such as VLC Media Player, Google Chrome, MPlayer etc. This program also makes use of the [Apache Commons Exec API](http://commons.apache.org/proper/commons-exec/) and [Tukaani XZ](http://tukaani.org/xz/java.html).
 
 As you might have guessed, to build this project, you need:
-* Internet conection for initial bild as it is maven based
-* Netbeans IDE (We use Netbeans IDE 8)
-* Java JDK (We've used JDK 8, but JDK 7+ will work)
+* Internet conection for initial bild as it is maven based.
+* Netbeans IDE (We use Netbeans IDE 8).
+* Java JDK (We've used JDK 8, but JDK 7+ will work).
 * ~~Prebuilt binanries of ffmpeg (You can get one from [Zeranoe](http://ffmpeg.zeranoe.com/builds/), or use your own)~~   
 Now `ffmpeg` executables included in `.jar` itself :smile:.
